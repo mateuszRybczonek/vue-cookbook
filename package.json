@@ -1,0 +1,16 @@
+{
+  "name": "vue-cookbook",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:mateuszRybczonek/vue-cookbook.git",
+  "author": "mateuszRybczonek <m.rybczonek@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "vue-svg-loader": "^0.11.0",
+    "vuepress-theme-live-ebook": "^1.2.0"
+  },
+  "scripts": {
+    "start": "vuepress dev",
+    "build": "vuepress build"
+  }
+}
