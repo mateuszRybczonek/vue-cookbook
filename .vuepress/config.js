@@ -4,7 +4,6 @@ module.exports = {
   theme: 'live-ebook', // Important! This is the name of this theme
   base: '/', // Base URL, leave as is if you don't serve the book from a folder
   head: [
-    ['link', { rel: 'icon', href: '/images/favicon.ico' }],
     ['meta', { property: 'og:type', content: 'website' }],
   ],
   themeConfig: {
