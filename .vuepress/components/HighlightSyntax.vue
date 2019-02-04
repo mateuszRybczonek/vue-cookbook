@@ -1,3 +1,0 @@
-<script>
-import 'prismjs'
-</script>

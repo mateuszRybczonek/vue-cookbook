@@ -4,7 +4,6 @@ title: "Using Scoped Slots to Abstract Functionality - Creating Google Map"
 chapter_number: "02"
 description: In this chapter you will get to know how to use scoped slots.
 ---
-<HighlightSyntax />
 
 # Using Scoped Slots to Abstract Functionality
 
