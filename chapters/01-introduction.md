@@ -7,21 +7,24 @@ description: In this chapter you will get to know what is Vue Cookbook and how i
 
 # Introduction
 
-## The Cookbook vs the Guide
-How is the cookbook different from the guide? Why is this necessary?
+## What is the Cookbook?
 
-* Greater Focus: In the guide, we’re essentially telling a story. Each section builds on and assumes knowledge from each previous section. In the cookbook, each recipe can and should stand on its own. This means recipes can focus on one specific aspect of Vue, rather than having to give a general overview.
+The cookbook is a place where you can find solutions for common cases needed in most of projects. It also contains some interesting examples of not so common, but interesting issues.
 
-* Greater Depth: To avoid making the guide too long, we try to include only the simplest possible examples to help you understand each feature. Then we move on. In the cookbook, we can include more complex examples, combining features in interesting ways. Each recipe can also be as long and detailed as it needs to be, in order to fully explore its niche.
+Imagine starting a new project that needs the most common mechanisms like, navbar with hamburger menu or expandable sidebar. Instead of starting from scratch and creating it again, or looking for a code in some of your previous projects why not have it all in one place, ready to use and adjustable enough to fit project-specific requirements.
 
-* Teaching JavaScript: In the guide, we assume at least intermediate familiarity with ES5 JavaScript. For example, we won’t explain how Array.prototype.filter works in a computed property that filters a list. In the cookbook however, essential JavaScript features (including ES6/2015+) can be explored and explained in the context of how they help us build better Vue applications.
+This is why Cookbook was created.
 
-* Exploring the Ecosystem: For advanced features, we assume some ecosystem knowledge. For example, if you want to use single-file components in Webpack, we don’t explain how to configure the non-Vue parts of the Webpack config. In the cookbook, we have the space to explore these ecosystem libraries in more depth - at least to the extent that is universally useful for Vue developers.
+See the basic concepts and rules below:
 
-## What we’re looking for
-The Cookbook gives developers examples to work off of that both cover common or interesting use cases, and also progressively explain more complex detail. Our goal is to move beyond a simple introductory example, and demonstrate concepts that are more widely applicable, as well as some caveats to the approach.
+* Independent recepies: each recipe should stand on its own. This means single recipe should focus on one specific use case. Recepies should not be coupled to each other and you should be able to extract required components with least effort required.
 
-If you’re interested in contributing, please initiate collaboration by filing an issue under the tag cookbook idea with your concept so that we can help guide you to a successful pull request. After your idea has been approved, please follow the template below as much as possible. Some sections are required, and some are optional. Following the numerical order is strongly suggested, but not required.
+* Proper explanation: each recipe should contain a code example and possibly step by step explanaition how to recreate a solution
+
+* Exploring the Ecosystem: cookbook is also a space where we can explore the libraries ecosystem in more depth.
+
+## Main goal
+The Cookbook gives developers examples to work off of that both cover common or interesting use cases, and also progressively explain more complex detail. The main goal is to create first point of contact when looking for a solution for most common issues and give space for sharing more complex and unique solutions.
 
 ### Recipes should generally:
 
@@ -33,4 +36,3 @@ If you’re interested in contributing, please initiate collaboration by filing 
 * Explain the process, rather than just the end result
 * Explain the pros and cons of your strategy, including when it is and isn’t appropriate
 * Mention alternative solutions, if relevant, but leave in-depth explorations to a separate recipe
-* We request that you follow the template below. We understand, however, that there are times when you may necessarily need to deviate for clarity or flow. Either way, all recipes should at some point discuss the nuance of the choice made using this pattern, preferably in the form of the alternative patterns section.
