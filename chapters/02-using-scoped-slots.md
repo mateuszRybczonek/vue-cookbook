@@ -15,7 +15,7 @@ For example, you want to create a wrapper component that is styled in a specific
 
 There are three types of slots:
 
-* **default / unnamed slots**: used when you have a single slot in a component. We create them by adding <slot></slot> in the template where we want to be able to inject our content. This `<slot>` tag will be replaced with any content passed to the component’s template.
+* **default / unnamed slots**: used when you have a single slot in a component. We create them by adding `<slot></slot>` in the template where we want to be able to inject our content. This `<slot>` tag will be replaced with any content passed to the component’s template.
 
 * **named slots**: used when you have multiple slots in a component and we want to inject different content in different places (slots). We create those by adding `<slot>` with a name attribute (e.g. `<slot name="header"></slot>`). Then when we render our component, we provide a slot content for each named slot by adding a slot attribute with the slot name.
 
@@ -106,7 +106,7 @@ This is just part of a working example, you can find the whole example in the Co
 
 ## 1. Create a component that initializes our map
 
-`GoogleMapLoader.vue`
+**GoogleMapLoader.vue**
 
 In the template, we create a container for the map which will be used to mount the [Map](https://developers.google.com/maps/documentation/javascript/reference/map#Map) object extracted from the Google Maps API.
 
@@ -143,7 +143,7 @@ Then, we set the initial values of google and map to null:
   },
 ```
 
-On the `mounted` hook we instantiate a `googleMapApi` and `Map` objects from the `GoogleMapsApi` and we set the values of `google` and `map` to the created instances:
+On the **mounted** hook we instantiate a **googleMapApi** and **Map** objects from the **GoogleMapsApi** and we set the values of **google** and **map** to the created instances:
 
 ```js
   async mounted() {
@@ -165,15 +165,15 @@ On the `mounted` hook we instantiate a `googleMapApi` and `Map` objects from the
 
 So far, so good. With all that done, we could continue adding the other objects to the map (Markers, Polylines, etc.) and use it as an ordinary map component.
 
-But, we want to use our `GoogleMapLoader` component only as a loader that prepares the map — we don’t want to render anything on it.
+But, we want to use our **GoogleMapLoader** component only as a loader that prepares the map — we don’t want to render anything on it.
 
-To achieve that, we need to allow the parent component that will use our `GoogleMapLoader` to access `this.google` and `this.map` that are set inside the `GoogleMapLoader` component. That’s where [scoped slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots) really shine. Scoped slots allow us to expose the properties set in a child component to the parent component. It may sound like Inception, but bear with me one more minute as we break that down further.
+To achieve that, we need to allow the parent component that will use our **GoogleMapLoader** to access **this.google** and **this.map** that are set inside the **GoogleMapLoader** component. That’s where [scoped slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots) really shine. Scoped slots allow us to expose the properties set in a child component to the parent component. It may sound like Inception, but bear with me one more minute as we break that down further.
 
 ## 2. Create component that uses our initializer component.
 
-`TravelMap.vue`
+**TravelMap.vue**
 
-In the template, we render the `GoogleMapLoader` component and pass props that are required to initialize the map.
+In the template, we render the **GoogleMapLoader** component and pass props that are required to initialize the map.
 
 ```html
 <template>
@@ -210,11 +210,11 @@ export default {
 
 Still no scoped slots, so let's add one.
 
-## 3. Expose `google` and `map` properties to the parent component by adding a scoped slot.
+## 3. Expose **google** and **map** properties to the parent component by adding a scoped slot.
 
-Finally, we can add a scoped slot that will do the job and allow us to access the child component props in the parent component. We do that by adding the `<slot>` tag in the child component and passing the props that we want to expose (using `v-bind` directive or `:propName` shorthand). It does not differ from passing the props down to the child component, but doing it in the `<slot>` tag will reverse the direction of data flow.
+Finally, we can add a scoped slot that will do the job and allow us to access the child component props in the parent component. We do that by adding the `<slot>` tag in the child component and passing the props that we want to expose (using **v-bind** directive or **:propName** shorthand). It does not differ from passing the props down to the child component, but doing it in the `<slot>` tag will reverse the direction of data flow.
 
-`GoogleMapLoader.vue`
+**GoogleMapLoader.vue**
 
 ```html
 <template>
@@ -232,13 +232,13 @@ Finally, we can add a scoped slot that will do the job and allow us to access th
 
 Now, when we have the slot in the child component, we need to receive and consume the exposed props in the parent component.
 
-## 4. Receive exposed props in the parent component using `slot-scope` attribute.
+## 4. Receive exposed props in the parent component using **slot-scope** attribute.
 
-To receive the props in the parent component, we declare a template element and use the `slot-scope` attribute. This attribute has access to the object carrying all the props exposed from the child component. We can grab the whole object or we can [de-structure that object](https://vuejs.org/v2/guide/components-slots.html#Destructuring-slot-scope) and only what we need.
+To receive the props in the parent component, we declare a template element and use the **slot-scope** attribute. This attribute has access to the object carrying all the props exposed from the child component. We can grab the whole object or we can [de-structure that object](https://vuejs.org/v2/guide/components-slots.html#Destructuring-slot-scope) and only what we need.
 
 Let’s de-structure this thing to get what we need.
 
-`TravelMap.vue`
+**TravelMap.vue**
 
 ```html
 <GoogleMapLoader
@@ -252,7 +252,7 @@ Let’s de-structure this thing to get what we need.
 </GoogleMapLoader>
 ```
 
-Even though the `google` and `map` props do not exist in the `TravelMap` scope, the component has access to them and we can use them in the template.
+Even though the **google** and **map** props do not exist in the **TravelMap** scope, the component has access to them and we can use them in the template.
 
 Yeah, OK, but why would I do things like that? What is the use of all that?
 
@@ -260,9 +260,9 @@ Glad you asked! Scoped slots allow us to pass a template to the slot instead of 
 
 ## 5. Create factory components for Markers and Polylines
 
-Now when we have our map ready we will create two factory components that will be used to add elements to the `TravelMap`.
+Now when we have our map ready we will create two factory components that will be used to add elements to the **TravelMap**.
 
-`GoogleMapMarker.vue`
+**GoogleMapMarker.vue**
 
 ```js
 import { POINT_MARKER_ICON_CONFIG } from '@/constants/mapSettings'
@@ -294,7 +294,7 @@ export default {
 }
 ```
 
-`GoogleMapLine.vue`
+**GoogleMapLine.vue**
 
 ```js
 import { LINE_PATH_CONFIG } from '@/constants/mapSettings'
@@ -325,19 +325,19 @@ export default {
 }
 ```
 
-Both of these receive `google` that we use to extract the required object (Marker or Polyline) as well as `map` which gives as a reference to the map on which we want to place our element.
+Both of these receive **google** that we use to extract the required object (Marker or Polyline) as well as **map** which gives as a reference to the map on which we want to place our element.
 
-Each component also expects an extra prop to create a corresponding element. In this case, we have `marker` and `path`, respectively.
+Each component also expects an extra prop to create a corresponding element. In this case, we have **marker** and **path**, respectively.
 
-On the mounted hook, we create an element (Marker/Polyline) and attach it to our map by passing the `map` property to the object constructor.
+On the mounted hook, we create an element (Marker/Polyline) and attach it to our map by passing the **map** property to the object constructor.
 
 There’s still one more step to go...
 
 ## 6. Add elements to map
 
-Let’s use our factory components to add elements to our map. We must render the factory component and pass the `google` and `map` objects so data flows to the right places.
+Let’s use our factory components to add elements to our map. We must render the factory component and pass the **google** and **map** objects so data flows to the right places.
 
-We also need to provide the data that’s required by the element itself. In our case, that’s the `marker` object with the position of the marker and the `path` object with Polyline coordinates.
+We also need to provide the data that’s required by the element itself. In our case, that’s the **marker** object with the position of the marker and the **path** object with Polyline coordinates.
 
 Here we go, integrating the data points directly into the template:
 
