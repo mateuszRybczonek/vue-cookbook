@@ -15,9 +15,9 @@ For example, you want to create a wrapper component that is styled in a specific
 
 There are three types of slots:
 
-* **default / unnamed slots**: used when you have a single slot in a component. We create them by adding <slot></slot> in the template where we want to be able to inject our content. This **<slot>** tag will be replaced with any content passed to the component’s template.
+* **default / unnamed slots**: used when you have a single slot in a component. We create them by adding `<slot></slot>` in the template where we want to be able to inject our content. This `<slot>` tag will be replaced with any content passed to the component’s template.
 
-* **named slots**: used when you have multiple slots in a component and we want to inject different content in different places (slots). We create those by adding **<slot>** with a name attribute (e.g. **<slot name="header"></slot>**). Then when we render our component, we provide a slot content for each named slot by adding a slot attribute with the slot name.
+* **named slots**: used when you have multiple slots in a component and we want to inject different content in different places (slots). We create those by adding `<slot>` with a name attribute (e.g. `<slot name="header"></slot>`). Then when we render our component, we provide a slot content for each named slot by adding a slot attribute with the slot name.
 
 ```html
 <base-layout>
@@ -30,7 +30,7 @@ There are three types of slots:
 </base-layout>
 ```
 
-By doing that, the **<slot>** tags in the component will be replaced by content passed to the component.
+By doing that, the `<slot>` tags in the component will be replaced by content passed to the component.
 
 * **scoped slot**: used when you want a template inside a slot to access data from the child component that renders the slot content. This is particularly useful when you need freedom in creating custom templates that use the child component’s data properties.
 
@@ -212,7 +212,7 @@ Still no scoped slots, so let's add one.
 
 ## 3. Expose **google** and **map** properties to the parent component by adding a scoped slot.
 
-Finally, we can add a scoped slot that will do the job and allow us to access the child component props in the parent component. We do that by adding the **<slot>** tag in the child component and passing the props that we want to expose (using **v-bind** directive or **:propName** shorthand). It does not differ from passing the props down to the child component, but doing it in the **<slot>** tag will reverse the direction of data flow.
+Finally, we can add a scoped slot that will do the job and allow us to access the child component props in the parent component. We do that by adding the `<slot>` tag in the child component and passing the props that we want to expose (using **v-bind** directive or **:propName** shorthand). It does not differ from passing the props down to the child component, but doing it in the `<slot>` tag will reverse the direction of data flow.
 
 **GoogleMapLoader.vue**
 
