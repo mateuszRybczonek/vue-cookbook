@@ -12,8 +12,8 @@ module.exports = {
     exitUrl: 'https://github.com/mateuszRybczonek',
     company: {
       name: 'Mateusz Rybczonek',
-      url: 'https://github.com/mateuszRybczonek',
-      logo: '/images/netguru.svg'
+      url: 'https://github.com/mateuszRybczonek/vue-cookbook',
+      logo: '/images/github.svg'
     }
   },
 
