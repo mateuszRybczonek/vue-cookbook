@@ -102,7 +102,7 @@ export default {
 
 This is just part of a working example, you can find the whole example in the Codesandbox below.
 
-<iframe src="https://codesandbox.io/embed/1o45zvxk0q" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<BaseSandbox src="https://codesandbox.io/embed/1o45zvxk0q" />
 
 ## 1. Create a component that initializes our map
 

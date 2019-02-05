@@ -25,7 +25,7 @@ Same basic lazy loading concept, but another way to go about it.
 
 I created [an example](https://codesandbox.io/s/5v17x4zr64), based on Benjamin Taylor's [blog post](https://benjamintaylorportfolio.netlify.com/?utm_campaign=Revue%20newsletter&utm_medium=Newsletter&utm_source=Vue.js%20Developers#/post/lazy-loading-images-with-vue-js-directives). It contains a list of random articles each one containing a short description, image, and a link to the source of the article. We will go through the process of creating a component that is in charge of displaying that list, rendering an article, and lazy loading the image for a specific article.
 
-<iframe src="https://codesandbox.io/s/5v17x4zr64" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<BaseSandbox src="https://codesandbox.io/s/5v17x4zr64" />
  
 Let’s get lazy! Or at least break this component down piece-by-piece.
 
