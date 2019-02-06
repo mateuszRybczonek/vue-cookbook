@@ -7,6 +7,15 @@
       <span class="chapter-list-item__header-type">
         {{ chapterType}}
       </span>
+
+      <div class="chapter-list-item__header-tags">
+        <BaseBadge
+          v-for="tag in chapterTags"
+          :key="tag"
+          :label="tag"
+          class="chapter-list-item__header-tag"
+        />
+      </div>
     </div>
 
     <div class="chapter-list-item__content">
@@ -16,7 +25,7 @@
     </div>
 
     <div class="chapter-list-item__footer">
-      <ArrowRight slot="icon" />
+      <VueLogo />
       <BaseButton
         class="chapter-list-item__button"
         type="ellipse"
@@ -30,13 +39,17 @@
 </template>
 
 <script>
+import BaseBadge from './BaseBadge'
 import BaseButton from './BaseButton'
 import ArrowRight from '../public/images/tail-right.svg?inline'
+import VueLogo from '../public/images/vue-logo.svg?inline'
 
 export default {
   components: {
     ArrowRight,
-    BaseButton
+    BaseBadge,
+    BaseButton,
+    VueLogo
   },
 
   props: {
@@ -49,12 +62,17 @@ export default {
   computed: {
     chapterType() {
       return this.chapter.frontmatter.type
+    },
+
+    chapterTags() {
+      return this.chapter.frontmatter.tags
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+$c-white: #fff;
 $c-primary-accent: #ff9a57;
 $c-primary-accent--dark: #dd8346;
 
@@ -86,6 +104,17 @@ $c-primary-accent--dark: #dd8346;
       font-weight: 700;
       color: $c-primary-accent;
     }
+
+    &-tags {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    &-tag {
+      margin: 5px 5px 5px 0;
+      color: $c-white;
+    }
   }
   
   &__content {
@@ -93,10 +122,10 @@ $c-primary-accent--dark: #dd8346;
 
     &-title {
       display: flex;
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 16px;
       letter-spacing: 0.5px;
-      text-align: center;
+      line-height: 25px;
+      text-align: right;
       margin: 10px 0;
     }
   }
