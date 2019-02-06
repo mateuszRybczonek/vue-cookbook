@@ -4,7 +4,7 @@ title: "Infinite Scroll with Vue.js and Intersection Observer"
 chapter_number: "05"
 description: In this chapter you will learn how to build infinite scroll with Vue.js.
 type: "Use case"
-tags: ["Infinite scroll", "Intersection Observer", "Images", "Performance"]
+tags: ["Infinite scroll", "Images", "Performance"]
 ---
 
 # Infinite Scroll with Vue.js and Intersection Observer
