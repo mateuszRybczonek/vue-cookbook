@@ -34,7 +34,6 @@
         <ArrowRight slot="icon" />
       </BaseButton>
     </div>
-
   </article>
 </template>
 
@@ -80,6 +79,7 @@ $c-primary-accent--dark: #dd8346;
   display: flex;
   justify-content: space-between;
   width: calc(50% - 20px);
+  height: 250px;
   margin: 10px;
   padding: 10px 15px;
   box-shadow: 0 16px 32px 0 rgba(120, 120, 120, 0.1);
