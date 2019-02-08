@@ -7,6 +7,8 @@ type: "Use case"
 tags: ["Lazy Loading", "Images", "Performance"]
 ---
 
+<MainMenuButton />
+
 # Lazy Loading Images with Vue.js Directives and Intersection Observer
 
 ## Introduction
