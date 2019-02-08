@@ -7,6 +7,8 @@ type: "Use case"
 tags: ["Infinite scroll", "Images", "Performance"]
 ---
 
+<MainMenuButton />
+
 # Infinite Scroll with Vue.js and Intersection Observer
 
 ## Introduction

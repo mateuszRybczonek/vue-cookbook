@@ -3,9 +3,11 @@ layout: chapter
 title: "Using Scoped Slots to Abstract Functionality - Creating Google Map"
 chapter_number: "03"
 description: In this chapter you will get to know how to use scoped slots.
-type: "Component"
+type: "Use case"
 tags: ["Scoped slots", "Google map"]
 ---
+
+<MainMenuButton />
 
 # Using Scoped Slots to Abstract Functionality
 

@@ -5,6 +5,8 @@ chapter_number: "01"
 description: In this chapter you will get to know what is Vue Cookbook and how it can help you.
 ---
 
+<MainMenuButton />
+
 # Introduction
 
 ## What is the Cookbook?

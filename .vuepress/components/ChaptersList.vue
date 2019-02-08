@@ -129,13 +129,24 @@ $c-primary-accent: #ff9a57;
   &__header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+    }
 
     &-subheader {
       display: flex;
       width: 260px;
+      margin-bottom: 20px;
       justify-content: space-between;
       align-items: center;
+
+      @media screen and (min-width: 768px) {
+        margin-bottom: 0;
+      }
 
       &-title {
         font-size: 14px;
