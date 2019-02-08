@@ -1,8 +1,8 @@
 ---
 layout: chapter
-title: "Lazy Loading Images with Vue.js Directives and Intersection Observer"
+title: "Lazy Loading Images with Intersection Observer"
 chapter_number: "04"
-description: In this chapter you will learn how to lazy load images with Vue.js.
+description: In this chapter you will learn how to lazy load images.
 type: "Use case"
 tags: ["Lazy Loading", "Images", "Performance"]
 ---

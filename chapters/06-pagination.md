@@ -120,6 +120,7 @@ export default {
           break
         default:
           this.currentPage = value
+          break
       }
 
       const { data } = await axios.get(
@@ -238,7 +239,7 @@ We will render that component just below our **ArticleItems** in **ArticlesList*
 
 That was the easy part, now we need to create a list of page numbers each allowing us to select a specific page, the number of pages should be customizable and we also need to make sure not to show any pages that may lead us beyond the collection range.
 
-## 3. Requirement 2 - Allow user to go to specific page within a range from currently selected page
+## 4. Requirement 2 - Allow user to go to specific page within a range from currently selected page
 
 Let's first create a component that will be used as a single page number. I called it **BasePaginationTrigger**. It will do two things, show the page number passed from the **BasePagination** component and emit an event when user clicks on a specific number.
 
@@ -336,7 +337,7 @@ To handle all those cases we will create a computed property that will return an
 
 Before going to the cases one by one we create few variables:
 - **visiblePagesThreshold** - tells us how many pages from the center (selected page should be shown)
-- **pagintationTriggersArray** - array that will be filled with page numbers, we use **visiblePagesCount** to create an array with required length
+- **paginationTriggersArray** - array that will be filled with page numbers, we use **visiblePagesCount** to create an array with required length
 
 ```js
 // BasePagination.vue
@@ -361,7 +362,6 @@ export default {
     }
   ...
 }
-
 ```
 
 Now let's go through each case separately.
@@ -422,7 +422,7 @@ We know what number should be in the center of our list (current page), we also 
 }
 ```
 
-## 4. Render the list of numbers in **BasePagination** component.
+## 5. Render the list of numbers in **BasePagination** component.
 
 Now that we know exactly what number we want to show in our pagination we need to render a trigger component for each one of them.
 
@@ -430,6 +430,8 @@ We do that using **v-for** directive. Let's also add a conditional class that wi
 
 ```html
 <!-- BasePagination.vue -->
+<template>
+  ...
   <BasePaginationTrigger
     v-for="paginationTrigger in paginationTriggers"
     :class="{
@@ -441,6 +443,8 @@ We do that using **v-for** directive. Let's also add a conditional class that wi
     class="base-pagination__description"
     @loadPage="onLoadPage"
   />
+  ...
+</template>
 ```
 
 And we are done. We just build nice and reusable pagination component.
