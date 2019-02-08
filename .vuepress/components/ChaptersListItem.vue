@@ -78,7 +78,7 @@ $c-primary-accent--dark: #dd8346;
 .chapter-list-item {
   display: flex;
   justify-content: space-between;
-  width: calc(50% - 20px);
+  width: 100%;
   height: 250px;
   margin: 10px;
   padding: 10px 15px;
@@ -89,6 +89,11 @@ $c-primary-accent--dark: #dd8346;
   flex-direction: column;
   transition: all 300ms ease-in-out;
   cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    width: calc(50% - 20px);
+  }
+
 
   &:hover {
     background-color: rgba($c-primary-accent, 0.1);
