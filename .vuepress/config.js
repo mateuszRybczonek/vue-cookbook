@@ -5,7 +5,7 @@ module.exports = {
   base: '/', // Base URL, leave as is if you don't serve the book from a folder
   head: [
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'google-site-verification', content: 'xE_sAhe0GDMuRjcF5uaBVCG_hheknz5hGiT6xD8P2O4' }],
+    ['meta', { name: 'google-site-verification', content: 'xE_sAhe0GDMuRjcF5uaBVCG_hheknz5hGiT6xD8P2O4' }],
   ],
   themeConfig: {
     bookTitle: 'Vue cookbook', // Book title
