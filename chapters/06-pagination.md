@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: "BasePagination component"
+title: "Pagination component"
 chapter_number: "06"
 description: In this chapter you will learn how to build reusable Pagination component.
 type: "Component"
@@ -13,20 +13,21 @@ tags: ["Pagination", "Component", "Performance"]
 
 ## Introduction
 
-If we look at the web applications, the idea behind most of them is to fetch data from the database and present it to the user in the best possible way. When we deal with data there are cases when the best possible way of presentation means creating a list.
-Depending on the amount of data and its content we may decide to show all content at once (very rarely), or show only a specific part of a bigger data set. The main reason behind showing only part of the existing data is that we want to keep our applications as performant as possible and avoid loading / showing unnecessary data.
+The idea behind most of web applications is to fetch data from the database and present it to the user in the best possible way. When we deal with data there are cases when the best possible way of presentation means creating a list.
 
-If we decide to show our data ‘in chunks’ we need a way to navigate through that collection.
-The two most common ways of navigating through set of data are:
+Depending on the amount of data and its content, we may decide to show all content at once (very rarely), or show only a specific part of a bigger data set (more likely). The main reason behind showing only part of the existing data is that we want to keep our applications as performant as possible and avoid loading or showing unnecessary data.
 
-- pagination - technique that splits the set of data into specific number of pages, it saves users from being overwhelmed by the amount of data on one page and allows user to navigate through it
-- infinite scrolling - technique that loads content continuously as the user scrolls down the page, eliminating the need for pagination
+If we decide to show our data in "chunks" then we need a way to navigate through that collection. The two most common ways of navigating through set of data are:
 
-I created an example with a list of random articles, each one containing a short description, image, and a link to the source of the article. We will go through the process of creating a component that is in charge of displaying that list, and triggering action that fetch additional articles when we click on a specific page to be displayed. That means creating a pagination component.
+The first is pagination, a technique that splits the set of data into a specific number of pages, saving users from being overwhelmed by the amount of data on one page and allowing them to view one set of results at a time. Take this very blog you're reading, for example. The homepage lists the latest 10 posts. Viewing the next set of latest posts requires clicking a button.
+
+The second common technique is infinite scrolling, something you're likely familiar with if you've ever scrolled through a timeline on either Facebook or Twitter.
+
+We're going to take a deeper look at the first type in this post. Pagination is something we encounter on a near-daily basis, yet making it is not exactly trivial. It's a great use case for a component, so that's exactly what we're going to do. We will go through the process of creating a component that is in charge of displaying that list, and triggering the action that fetches additional articles when we click on a specific page to be displayed. In other words, we’re making a pagination component in Vue.js like this:
 
 <BaseSandbox src="https://codesandbox.io/s/nw5mqv3564" />
 
-Let’s see how to build it.
+Let's go through the steps together.
 
 ## 1. Create the `ArticlesList` component in Vue
 
@@ -37,7 +38,6 @@ Let’s start by creating a component that will show a list of articles (but wit
 <template>
   <div>
     <ArticleItem
-      v-if="article.urlToImage"
       v-for="article in articles"
       :key="article.publishedAt"
       :article="article"
@@ -47,12 +47,12 @@ Let’s start by creating a component that will show a list of articles (but wit
 ```
 
 In the script section of the component, we set initial data:
-- **articles** - empty array filled with data fetched from the API on **mounted** hook
-- **currentPage** - used to manipulate the pagination
-- **pageCount** - total number of pages, calculated on **mounted** hook based on the API response
-- **visibleItemsPerPageCount** - how many articles we want to see on a single page
+- **articles** - This is an empty array filled with data fetched from the API on **mounted** hook
+- **currentPage** - This is used to manipulate the pagination
+- **pageCount** - This is the total number of pages, calculated on **mounted** hook based on the API response
+- **visibleItemsPerPageCount** - This is how many articles we want to see on a single page
 
-At this stage we fetch only first page of the news feed. That will give us a list of first two articles.
+At this stage, we fetch only first page of the article list. This will give us a list two articles:
 
 ```js
 // ArticlesList.vue
@@ -102,7 +102,7 @@ export default {
 
 Now we need to create a method that will load next page, previous page or a selected page.
 
-In **pageChangeHandle** method before loading new articles we change the **currentPage** value depending on a property passed to the method and fetch the data respective to a specific page from the API. Upon receiving new data we replace the existing **articles** array with the fresh data containing new page of articles.
+In **pageChangeHandle** method, before loading new articles, we change the **currentPage** value depending on a property passed to the method and fetch the data respective to a specific page from the API. Upon receiving new data we replace the existing **articles** array with the fresh data containing new page of articles.
 
 ```js
 //ArticlesList.vue
@@ -135,17 +135,19 @@ export default {
 }
 ```
 
-Now we have the **pageChangeHandle** method, but we do not fire it anywhere. We need to create a component that will be responsible for that.
+## 3: Create a component to fire page changes
+We have the pageChangeHandle method, but we do not fire it anywhere. We need to create a component that will be responsible for that.
 
-### This component should do following things:
+This component should do the following things:
 
-1. Allow user to go to next / previous page
-2. Allow user to go to specific page within a range from currently selected page
-3. Show information on which page we are currently on
+Allow the user to go to the next/previous page.
+Allow the user to go to a specific page within a range from currently selected page.
+Change the range of page numbers based on the current page.
+If we were to sketch that out, it would look something like this:
 
 Let’s proceed!
 
-## 3. Requirement 1 - Allow user to go to next / previous page
+### Requirement 1 - Allow the user to go to the next or previous page
 
 Our **BasePagination** will contain two buttons responsible for going to the next and previous page.
 
@@ -170,7 +172,7 @@ Our **BasePagination** will contain two buttons responsible for going to the nex
 </template>
 ```
 
-The component will accept **currentPage** and **pageCount** properties from the parent component and emit proper actions back to the parent when the next / previous button is clicked. It will also be responsible for disabling buttons when we are on the first or last page not to go out of the existing collection.
+The component will accept **currentPage** and **pageCount** properties from the parent component and emit proper actions back to the parent when the next or previous button is clicked. It will also be responsible for disabling buttons when we are on the first or last page to prevent moving out of the existing collection.
 
 ```js
 // BasePagination.vue
@@ -221,7 +223,6 @@ We will render that component just below our **ArticleItems** in **ArticlesList*
 <template>
   <div>
     <ArticleItem
-      v-if="article.urlToImage"
       v-for="article in articles"
       :key="article.publishedAt"
       :article="article"
@@ -237,11 +238,11 @@ We will render that component just below our **ArticleItems** in **ArticlesList*
 </template>
 ```
 
-That was the easy part, now we need to create a list of page numbers each allowing us to select a specific page, the number of pages should be customizable and we also need to make sure not to show any pages that may lead us beyond the collection range.
+That was the easy part. Now we need to create a list of page numbers, each allowing us to select a specific page. The number of pages should be customizable and we also need to make sure not to show any pages that may lead us beyond the collection range.
 
-## 4. Requirement 2 - Allow user to go to specific page within a range from currently selected page
+### Requirement 2 - Allow the user to go to a specific page within a range
 
-Let's first create a component that will be used as a single page number. I called it **BasePaginationTrigger**. It will do two things, show the page number passed from the **BasePagination** component and emit an event when user clicks on a specific number.
+Let's first create a component that will be used as a single page number. I called it **BasePaginationTrigger**. It will do two things: show the page number passed from the **BasePagination** component and emit an event when user clicks on a specific number.
 
 ```html
 <!--BasePaginationTrigger.vue-->
@@ -269,7 +270,7 @@ export default {
 </script>
 ```
 
-This component will them be rendered in the **BasePagination** component between the next / previous buttons. 
+This component will them be rendered in the **BasePagination** component between the next and previous buttons. 
 
 ```html
 <!--BasePagination.vue-->
@@ -321,23 +322,26 @@ Then in the **ArticlesList** we will listen to that event and trigger **pageChan
 </template>
 ```
 
-Ok, now we have a single trigger that shows us current page and allows us to fetch the same page again, pretty useless, don't you think? Let's make some use of that newly created trigger component. We need a list of pages that will allow us to jump from one page to another without a need of going through the pages between.
+### Requirement 3: Change the range of page numbers based on the current page
 
-We also need to make sure to display the pages in a nice manner. We always want to display first page and the last page (to be on the edges of the list) and remaining pages between them. 
+OK, now we have a single trigger that shows us the current page and allows us to fetch the same page again. Pretty useless, don't you think? Let's make some use of that newly created trigger component. We need a list of pages that will allow us to jump from one page to another without needing to go through the pages in between.
 
-### We have three possible scenarios:
+We also need to make sure to display the pages in a nice manner. We always want to display the first page (on the far left) and the last page (on the far right) on the pagination list and then the remaining pages between them.
 
-1. When selected page number is smaller then the half of the list width - **1 - 2 - 3 - 4 - 18**
+#### We have three possible scenarios:
 
-2. When selected page number is bigger then half of the list width counting from the end of the list - **1 - 15 - 16 - 17 - 18**
+1. The selected page number is smaller then the half of the list width - **1 - 2 - 3 - 4 - 18**
+
+2. The selected page number is bigger then half of the list width counting from the end of the list - **1 - 15 - 16 - 17 - 18**
 
 3. All other cases - **1 - 4 - 5 - 6 - 18**
 
-To handle all those cases we will create a computed property that will return an array of numbers that should be shown between the next / previous buttons. To make the component more reusable we will accept a property **visiblePagesCount** that will specify how many pages should be visible in the pagination component.
+To handle all those cases, we will create a computed property that will return an array of numbers that should be shown between the next and previous buttons. To make the component more reusable we will accept a property **visiblePagesCount** that will specify how many pages should be visible in the pagination component.
 
 Before going to the cases one by one we create few variables:
-- **visiblePagesThreshold** - tells us how many pages from the center (selected page should be shown)
-- **paginationTriggersArray** - array that will be filled with page numbers, we use **visiblePagesCount** to create an array with required length
+- **visiblePagesThreshold** - Tells us how many pages from the center (selected page should be shown)
+- **paginationTriggersArray** - Array that will be filled with page numbers
+- **visiblePagesCount** - Creates an array with required length
 
 ```js
 // BasePagination.vue
@@ -366,7 +370,7 @@ export default {
 
 Now let's go through each case separately.
 
-1. When selected page number is smaller then the half of the list width - **1 - 2 - 3 - 4 - 18**
+#### Scenario 1: When selected page number is smaller then the half of the list width - **1 - 2 - 3 - 4 - 18**
 
 We set the first element to be always equal to 1. Then we iterate through the list adding index to each element. At the end we add last value to be equal to the last page number (we want to be able to go straight to the last page).
 
@@ -385,7 +389,7 @@ if (currentPage <= visiblePagesThreshold + 1) {
   }
 ```
 
-2. When selected page number is bigger then half of the list width counting from the end of the list - **1 - 15 - 16 - 17 - 18**
+#### Scenario 2: When selected page number is bigger then half of the list width counting from the end of the list - **1 - 15 - 16 - 17 - 18**
 
 Similar to the previous case, we start with the last page and iterate through the list subtracting, this time, index from each element. Then we reverse the array to get the proper order and push 1 into the first place in our array.
 
@@ -403,7 +407,7 @@ Similar to the previous case, we start with the last page and iterate through th
   }
 ```
 
-3. All other cases - **1 - 4 - 5 - 6 - 18**
+#### Scenario 3: All other cases - **1 - 4 - 5 - 6 - 18**
 
 We know what number should be in the center of our list (current page), we also know how long the list should be. This allows us to get the first number that should be in our array. The we populate the list by adding index to each element. At the end we push 1 into the first place in our array and replace the last number with our last page number.
 
@@ -447,10 +451,14 @@ We do that using **v-for** directive. Let's also add a conditional class that wi
 </template>
 ```
 
-And we are done. We just build nice and reusable pagination component.
+And we are done! We just build nice and reusable pagination component.
 
 ## When To Avoid This Pattern
-This pattern is not recommended for content that streams constantly and has a relatively flat structure (each item is at the same level of hierarchy and has similar chances of being interesting to users). In that case we are exploring the news rather than looking for something specific. We do not need to know where exactly the news is and how much we scrolled to get to a specific news, it makes the user experience more engaging in that case and saves us the effort to click next each time we reach the end of current page.
+Although this component is pretty sweet, it’s not a silver bullet for all use cases involving pagination.
+
+For example, it’s probably a good idea to avoid this pattern for content that streams constantly and has a relatively flat structure, like each item is at the same level of hierarchy and has a similar chance of being interesting to the user. In other words, something less like an article with multiple pages and something more like main navigation.
+
+Another example would be browsing news rather than looking for a specific news article. We do not need to know where exactly the news is and how much we scrolled to get to a specific article.
 
 ## Wrapping up
-This solution is recommended for goal-oriented finding tasks, requiring people to locate specific content or compare options. Imagine looking for a specific search result that appears on a certain page of the search results.
+Hopefully this is a pattern you will be able to find useful in a project, whether it’s for a simple blog, a complex e-commerce site, or something in between. Pagination can be a pain, but having a modular pattern that not only can be re-used, but considers a slew of scenarios, can make it much easier to handle.
