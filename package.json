@@ -6,7 +6,7 @@
   "author": "mateuszRybczonek <m.rybczonek@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "prismjs": "^1.15.0",
+    "prismjs": "^1.21.0",
     "vue-svg-loader": "^0.11.0",
     "vuepress": "^0.14.8",
     "vuepress-theme-live-ebook": "^1.2.0"
